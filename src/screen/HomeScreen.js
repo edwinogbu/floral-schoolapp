@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.profileInfo}>
           <View style={styles.profileImageContainer}>
             <Image
-             source={require('./../../assets/images/school-children-svg.jpg')}
+             source={require('./../../assets/images/three-student.png')}
               style={styles.profileImage}
             />
           </View>
@@ -128,6 +128,7 @@ const DataCard = ({ title, value, onPress, style }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: kTextWhiteColor,
     backgroundColor: kPrimaryColor,
   },
   profileHeader: {
@@ -158,12 +159,14 @@ const styles = StyleSheet.create({
   profileName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#FFF',
+    // color:kTextBlackColor,
+    color:kTextWhiteColor,
   },
   profileClass: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#FFF',
+    // color:kTextBlackColor,
+    color:kTextWhiteColor,
   },
   profileDate: {
     fontSize: 16,

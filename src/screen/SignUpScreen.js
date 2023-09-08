@@ -602,19 +602,19 @@ export default SignUpScreen;
 // const SignUpScreen = ({ navigation }) => {
 //   const [step, setStep] = useState(1);
 //   const [formData, setFormData] = useState({
-//     parent: '',
-//     username: '',
-//     email: '',
-//     studentName: '',
-//     sex: '',
-//     dob: '',
-//     phone: '',
-//     address: '',
-//     state: '',
-//     city: '',
-//     relationship: '',
-//     password: '',
-//     confirmPassword: '',
+    // parent: '',
+    // username: '',
+    // email: '',
+    // studentName: '',
+    // sex: '',
+    // dob: '',
+    // phone: '',
+    // address: '',
+    // state: '',
+    // city: '',
+    // relationship: '',
+    // password: '',
+    // confirmPassword: '',
 //   });
   
 //   // Define the passwordVisible state

@@ -564,15 +564,7 @@ const CustomPicker = ({ selectedValue, onValueChange }) => {
   );
 };
 
-// CustomCheckbox component
-// const CustomCheckbox = ({ checked, onPress, label }) => {
-//   return (
-//     <TouchableOpacity onPress={onPress} style={styles.checkboxContainer}>
-//       <View style={[styles.checkbox, checked && styles.checked]}></View>
-//       <Text>{label}</Text>
-//     </TouchableOpacity>
-//   );
-// };
+
 const CustomCheckbox = ({ checked, onPress, label }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.checkboxContainer}>
@@ -764,18 +756,18 @@ const FeeScreen = (navigation) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 2,
+    padding: 1,
     backgroundColor: kPrimaryColor,
   },
   contentContainer: {
     flex: 1,
     padding: 16,
     backgroundColor: '#f8f8f8',
-       width:'100%'
+    width:'100%'
   },
   paymentProfile: {
     backgroundColor: kPrimaryColor,
-    padding: 20,
+    padding: 10,
     // flex:1,
     // borderRadius: 10,
     // borderWidth: 1,
@@ -793,7 +785,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: '#FFF',
-    marginBottom: 10,
+    marginBottom: 5,
     textAlign: 'center', 
   },
   longLine: {
@@ -801,7 +793,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FFF',
   },
   table: {
-    marginTop: 10,
+    marginTop: 5,
     borderColor:kPrimaryColor,
     borderWidth: 2,
     padding: 1,
@@ -811,11 +803,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 1,
     borderWidth: 2,
     borderColor: '#ddd',
     borderRadius: 1,
-    padding: 15,
+    padding: 10,
     fontWeight: 'bold',
     fontSize:18,
   },
