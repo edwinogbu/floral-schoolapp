@@ -10,6 +10,7 @@ import FeeScreen from '../screen/FeeScreen';
 import ProfileScreen from '../screen/ProfileScreen';
 import AnnouncementScreen from './../screen/AnnouncementScreen';
 import AnnouncementDetailScreen from './../screen/AnnouncementDetailScreen';
+import BlogScreen from './../screen/BlogScreen';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -41,6 +42,9 @@ function BottomTabNavigator() {
           } else if (route.name === 'Profile') {
             iconName = 'school';
           } else if (route.name === 'Fees') { // Fixed 'Fees' icon name
+            iconName = 'newspaper';
+          
+          } else if (route.name === 'Blog') { // Fixed 'Fees' icon name
             iconName = 'newspaper';
           }
 
@@ -92,6 +96,20 @@ function BottomTabNavigator() {
         }}
       />
 
+      <Tab.Screen
+        name="Blog"
+        component={BlogScreen}
+        options={{
+          headerShown: false,
+          drawerIcon: ({ color, size }) => (
+            <AntDesign
+              name="school"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
@@ -262,6 +280,34 @@ export default function AppNavigator() {
           headerShown: true,
           headerTitleAlign: 'center',
           tabBarIcon: renderTabBarIcon({ name: 'Fees' }, 'book'),
+          headerLeft: () => (
+            <Ionicons
+              name="chevron-back-outline"
+              size={28}
+              onPress={() => navigation.goBack()}
+              style={{ marginLeft: 20 }}
+            />
+          ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => {}}>
+              <Image
+                source={require('./../../assets/images/school-logo.png')}
+                style={styles.logo}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="BlogScreen"
+        component={BlogScreen}
+        options={({ navigation }) => ({
+          title: 'blog ',
+          headerTitleStyle: styles.headerTitle,
+          headerShown: true,
+          headerTitleAlign: 'center',
+          tabBarIcon: renderTabBarIcon({ name: 'Blog' }, 'news'),
           headerLeft: () => (
             <Ionicons
               name="chevron-back-outline"

@@ -1,3 +1,340 @@
+// import React, { useState, useContext } from 'react';
+// import {
+//   View,
+//   Text,
+//   TextInput,
+//   TouchableOpacity,
+//   Image,
+//   StyleSheet,
+//   KeyboardAvoidingView,
+//   Platform,
+//   ScrollView,
+//   SafeAreaView,
+// } from 'react-native';
+// import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+// import { AuthContext } from './AuthContext';
+
+// const kPrimaryColor = '#253D84';
+// const kSecondaryColor = '#6789CA';
+// const kTextBlackColor = '#313131';
+// const kTextWhiteColor = '#FFFFFF';
+
+// const SignUpScreen = ({ navigation }) => {
+//   const { signUp } = useContext(AuthContext);
+
+//   const [name, setName] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [phone, setPhone] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [passwordVisible, setPasswordVisible] = useState(false);
+
+//   const [nameError, setNameError] = useState('');
+//   const [emailError, setEmailError] = useState('');
+//   const [phoneError, setPhoneError] = useState('');
+//   const [passwordError, setPasswordError] = useState('');
+
+//   const togglePasswordVisibility = () => {
+//     setPasswordVisible(!passwordVisible);
+//   };
+
+//   const validateFields = () => {
+//     let isValid = true;
+
+//     if (!name) {
+//       setNameError('Full Name is required');
+//       isValid = false;
+//     } else {
+//       setNameError('');
+//     }
+
+//     if (!email) {
+//       setEmailError('Email is required');
+//       isValid = false;
+//     } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+//       setEmailError('Invalid email address');
+//       isValid = false;
+//     } else {
+//       setEmailError('');
+//     }
+
+//     if (!phone) {
+//       setPhoneError('Phone number is required');
+//       isValid = false;
+//     } else {
+//       setPhoneError('');
+//     }
+
+//     if (!password || password.length < 5) {
+//       setPasswordError('Password should be at least 5 characters');
+//       isValid = false;
+//     } else {
+//       setPasswordError('');
+//     }
+
+//     return isValid;
+//   };
+
+//   const handleSignUp = async () => {
+//     if (validateFields()) {
+//       try {
+//         // Call the signUp function from the context with the user details
+//         await signUp(name, email, phone, password);
+
+//         // Navigate to the Home screen or another screen on successful signup
+//         navigation.navigate('HomeScreen');
+//       } catch (error) {
+//         // Handle signup errors, e.g., display an error message
+//         console.error('Signup error:', error);
+//       }
+//     }
+//   };
+
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <KeyboardAvoidingView
+//         style={styles.keyboardAvoidingContainer}
+//         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+//       >
+//         <ScrollView contentContainerStyle={styles.scrollView}>
+//           <View style={styles.logoContainer}>
+//             <Image
+//               source={require('./../../assets/images/students_profile.jpg')}
+//               style={styles.logo}
+//             />
+//             <Text style={styles.title}>Create an Account</Text>
+//           </View>
+
+//           <View style={styles.formContainer}>
+//             <Text style={styles.label}>Full Name</Text>
+//             <View style={styles.inputContainer}>
+//               <FontAwesome5
+//                 name="user"
+//                 size={20}
+//                 color={kTextBlackColor}
+//                 style={styles.icon}
+//               />
+//               <TextInput
+//                 style={styles.input}
+//                 placeholder="Full Name"
+//                 value={name}
+//                 onChangeText={(text) => setName(text)}
+//               />
+//             </View>
+//             {nameError !== '' && <Text style={styles.errorText}>{nameError}</Text>}
+
+//             <Text style={styles.label}>Email</Text>
+//             <View style={styles.inputContainer}>
+//               <FontAwesome5
+//                 name="envelope"
+//                 size={20}
+//                 color={kTextBlackColor}
+//                 style={styles.icon}
+//               />
+//               <TextInput
+//                 style={styles.input}
+//                 placeholder="Email"
+//                 value={email}
+//                 onChangeText={(text) => setEmail(text)}
+//                 keyboardType="email-address"
+//               />
+//             </View>
+//             {emailError !== '' && <Text style={styles.errorText}>{emailError}</Text>}
+
+//             <Text style={styles.label}>Phone</Text>
+//             <View style={styles.inputContainer}>
+//               <FontAwesome5
+//                 name="phone"
+//                 size={20}
+//                 color={kTextBlackColor}
+//                 style={styles.icon}
+//               />
+//               <TextInput
+//                 style={styles.input}
+//                 placeholder="Phone"
+//                 value={phone}
+//                 onChangeText={(text) => setPhone(text)}
+//                 keyboardType="phone-pad"
+//               />
+//             </View>
+//             {phoneError !== '' && <Text style={styles.errorText}>{phoneError}</Text>}
+
+//             <Text style={styles.label}>Password</Text>
+//             <View style={styles.inputContainer}>
+//               <FontAwesome5
+//                 name="lock"
+//                 size={20}
+//                 color={kTextBlackColor}
+//                 style={styles.icon}
+//               />
+//               <TextInput
+//                 style={styles.input}
+//                 placeholder="Password"
+//                 value={password}
+//                 onChangeText={(text) => setPassword(text)}
+//                 secureTextEntry={!passwordVisible}
+//               />
+//               <TouchableOpacity
+//                 onPress={togglePasswordVisibility}
+//                 style={styles.iconContainer}
+//               >
+//                 <FontAwesome5
+//                   name={passwordVisible ? 'eye-slash' : 'eye'}
+//                   style={styles.togglePasswordIcon}
+//                 />
+//               </TouchableOpacity>
+//             </View>
+//             {passwordError !== '' && (
+//               <Text style={styles.errorText}>{passwordError}</Text>
+//             )}
+
+//             <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
+//               <Text style={styles.signUpButtonText}>
+//                 SIGN UP{' '}
+//                 <FontAwesome name="arrow-right" style={styles.arrowIcon} />
+//               </Text>
+//             </TouchableOpacity>
+
+//             <View style={styles.loginContainer}>
+//               <Text style={styles.loginText}>Already have an account?</Text>
+//               <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
+//                 <Text style={styles.loginLink}> Login</Text>
+//               </TouchableOpacity>
+//             </View>
+//           </View>
+//         </ScrollView>
+//       </KeyboardAvoidingView>
+//     </SafeAreaView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: kPrimaryColor,
+//     paddingTop: 29,
+//   },
+//   keyboardAvoidingContainer: {
+//     flex: 1,
+//   },
+//   scrollView: {
+//     flexGrow: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   logoContainer: {
+//     alignItems: 'center',
+//   },
+//   title: {
+//     fontSize: 24,
+//     fontWeight: 'bold',
+//     color: kTextWhiteColor,
+//     marginTop: 10,
+//   },
+//   logo: {
+//     width: 150,
+//     height: 150,
+//     resizeMode: 'contain',
+//     marginBottom: 20,
+//     borderRadius: 75,
+//   },
+//   formContainer: {
+//     backgroundColor: kTextWhiteColor,
+//     borderTopLeftRadius: 50,
+//     borderTopRightRadius: 50,
+//     paddingHorizontal: 20,
+//     paddingTop: 20,
+//     paddingBottom: 140,
+//     width: '100%',
+//   },
+//   inputContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     borderBottomWidth: 1,
+//     borderColor: kTextBlackColor,
+//     marginBottom: 20,
+//     paddingBottom: 5,
+//     fontSize: 16,
+//   },
+//   label: {
+//     color: kTextBlackColor,
+//     fontSize: 16,
+//     marginBottom: 5,
+//     fontWeight: 'bold',
+//   },
+//   input: {
+//     flex: 1,
+//     height: 40,
+//     color: kTextBlackColor,
+//     marginLeft: 10,
+//     fontWeight: 'bold',
+//   },
+//   iconContainer: {
+//     position: 'absolute',
+//     right: 0,
+//     padding: 10,
+//   },
+//   togglePasswordIcon: {
+//     color: kPrimaryColor,
+//     fontWeight: 'bold',
+//     fontSize: 20,
+//   },
+//   togglePasswordText: {
+//     color: kPrimaryColor,
+//     alignSelf: 'flex-end',
+//     marginBottom: 10,
+//     fontWeight: 'bold',
+//   },
+//   signUpButton: {
+//     backgroundColor: kPrimaryColor,
+//     borderRadius: 50,
+//     paddingVertical: 15,
+//     alignItems: 'center',
+//     marginTop: 20,
+//   },
+//   signUpButtonText: {
+//     color: kTextWhiteColor,
+//     fontSize: 20,
+//     fontWeight: 'bold',
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   arrowIcon: {
+//     marginRight: 5,
+//     color: kTextWhiteColor,
+//     fontSize: 22,
+//     paddingLeft: 20,
+//   },
+//   icon: {
+//     marginRight: 10,
+//     color: kTextBlackColor,
+//   },
+//   errorText: {
+//     color: 'red',
+//     fontSize: 14,
+//     marginBottom: 10,
+//   },
+
+//   loginContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'center',
+//     marginTop: 7,
+//     marginBottom: 20,
+//   },
+//   loginText: {
+//     color: '#333',
+//     fontWeight: 'bold',
+//     marginBottom: 20,
+//   },
+//   loginLink: {
+//     fontWeight: 'bold',
+//     color: '#877dfa',
+//   },
+// });
+
+// export default SignUpScreen;
+
+
+
 import React, { useState, useContext } from 'react';
 import {
   View,
@@ -602,19 +939,19 @@ export default SignUpScreen;
 // const SignUpScreen = ({ navigation }) => {
 //   const [step, setStep] = useState(1);
 //   const [formData, setFormData] = useState({
-    // parent: '',
-    // username: '',
-    // email: '',
-    // studentName: '',
-    // sex: '',
-    // dob: '',
-    // phone: '',
-    // address: '',
-    // state: '',
-    // city: '',
-    // relationship: '',
-    // password: '',
-    // confirmPassword: '',
+//     parent: '',
+//     username: '',
+//     email: '',
+//     studentName: '',
+//     sex: '',
+//     dob: '',
+//     phone: '',
+//     address: '',
+//     state: '',
+//     city: '',
+//     relationship: '',
+//     password: '',
+//     confirmPassword: '',
 //   });
   
 //   // Define the passwordVisible state

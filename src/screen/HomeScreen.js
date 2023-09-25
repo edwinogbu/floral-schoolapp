@@ -40,8 +40,8 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.dashboardContainer}>
         <View style={styles.dataCardRow}>
           <DataCard
-            title="Check Result"
-            onPress={() => {()=>{navigation,navigate('FeeScreen')}}}
+            title="Check blog"
+            onPress={() => {()=>{navigation,navigate('BlogScreen')}}}
           />
           <DataCard
             title="Pay fees"
